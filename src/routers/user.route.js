@@ -1,16 +1,13 @@
 const express=require('express');
+const { signup, signin } = require('../controllers/user.controller');
 const router=express.Router();
 
-const User=require('../models/user.model');
 
 
-router.post('/signin',(request,response)=>{
 
-})
+router.post('/signin',signin);
 
 
-router.post('/signup',(request,response)=>{
-    
-})
+router.post('/signup',signup);
 
 module.exports=router;

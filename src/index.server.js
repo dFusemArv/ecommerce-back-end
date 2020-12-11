@@ -20,7 +20,10 @@ mongoose.connect(
     `mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.rhtq2.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`, 
     {
         useNewUrlParser: true, 
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+
     }).then(()=>{console.log("database connected yay!")});
 // mongodb+srv://root:<password>@cluster0.rhtq2.mongodb.net/<dbname>?retryWrites=true&w=majority
 

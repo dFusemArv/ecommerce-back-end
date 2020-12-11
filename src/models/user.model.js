@@ -36,12 +36,14 @@ const userSchema=new mongoose.Schema({
             trim:true
         },
         role:{
-            enum:['user','admin']
+            type:String,
+            enum:['user','admin'],
+            default:'user'
         },
         hash_password:{
             type:String,
             min:8,
-            required:true
+            // required:true
         },
         profilePicture:{
             type:String
@@ -56,6 +58,11 @@ userSchema.virtual('password').set(function(password) {
         this.hash_password=bcrypt.hashSync(password,10);
 
   });
+
+
+  userSchema.virtual('fullName').get(function(){
+      return `${this.firstName} ${this.lastName}`;
+  })
 
 
   userSchema.method({
