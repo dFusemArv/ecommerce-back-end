@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser=require('body-parser');
 //routers
 const userRouters=require('./routers/user.route');
+const adminRouters=require('./routers/admin.route');
 
 
 //configuring dotenv to excess env file
@@ -41,6 +42,7 @@ app.use(bodyParser.urlencoded({
 
 //using userRouters middleware
 app.use('/api',userRouters);
+app.use('/api',adminRouters);
 
 app.listen(process.env.PORT,()=>{
     console.log(`server is up and running in ${process.env.PORT}`);

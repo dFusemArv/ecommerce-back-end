@@ -7,7 +7,7 @@ const signup=(request,response)=>{
     userModel.findOne({email:request.body.email}).exec((error,user)=>{
         if(user){
             return response.status(400).json({
-                message: "user already exists"
+                message: "admin already exists"
             })
         }
     })
@@ -30,19 +30,20 @@ const signup=(request,response)=>{
         userName,
         password,
         email,
-        contact
+        contact,
+        role:'admin'
     })
     new_user.save((error,userData)=>{
         if(error){
             return response.status(400).json({
-                message:"Could not store user data, something went wrong.",
+                message:"Could not store admin data, something went wrong.",
                 error:error
             });
         }
 
         if(userData){
             return response.status(201).json({
-                message:"new user registered"
+                message:"new admin registered"
             });
         }
     })
@@ -61,7 +62,7 @@ const signin=(request,response)=>{
 
 
         if(userData){
-                if(userData.authentication(request.body.password)){
+                if(userData.authentication(request.body.password) && userData.role==="admin"){
                     const token=jwt.sign({ _id:userData._id }, process.env.JWT_PRIVATE_KEY,{ expiresIn: "1h" });
                     const {_id,userName,role,email,fullName}=userData;
 
